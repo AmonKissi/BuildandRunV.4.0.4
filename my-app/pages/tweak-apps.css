@@ -1,0 +1,338 @@
+  /*
+   * Build and Run v.2.0.2 CSS.
+   *
+   * Note: The corresponding styles are in the ./tweak-apps.css file.
+   */
+
+.tweak-apps {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  .tweak-title {
+  font-size: xx-large;
+  font-weight: bold;
+  }
+  .number-selector {
+    margin-top: 1rem;
+  }
+  
+.tweak-image {
+    width: 100px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    margin-bottom: -4rem;
+    margin-top: -2rem;
+}
+.tweak-image-title {
+  width: 200px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  margin-bottom: -4rem;
+  margin-top: -2rem;
+}
+
+.tweak-image-movie-five {
+  width: 50px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  margin-bottom: -4rem;
+  padding-bottom: 1rem;
+  margin-top: -4rem;
+}
+
+#ai-bots-image {
+  padding-top: 1rem;
+}
+
+#cryptocurrencies-image {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+}
+
+/* DESIGN OF BOX */
+
+.cardi {
+    --border-radius: 0.75rem;
+    --primary-color: #7257fa;
+    --secondary-color: #3c3852;
+    width: 210px;
+    min-height: 210px;
+    
+
+    font-family: "Arial";
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    background: #f1f1f3;
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 3%);
+    position: relative;
+    margin-bottom: 0.2rem;
+  }
+  
+  .cardi .cardi__content {
+    color: var(--secondary-color);
+    font-size: 0.86rem;
+    display: block;
+  }
+  
+  .cardi .cardi__title {
+    padding: 0;
+    font-size: 1.1rem;
+    font-weight: 650;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-bottom: -0.10rem;
+  }
+  
+  .cardi .cardi__date {
+    color: #6e6b80;
+    font-size: 0.8rem;
+  }
+  
+  .cardi .cardi__arrow {
+    position: absolute;
+    background: var(--primary-color);
+    padding: 0.4rem;
+    border-top-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    bottom: 0;
+    right: 0;
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .cardi svg {
+    transition: 0.2s;
+  }
+  
+  /* hover */
+  .cardi:hover .cardi__title {
+    color: var(--primary-color);
+    text-decoration: underline;
+  }
+  
+  .cardi:hover .cardi__arrow {
+    background: #008bf8;
+  }
+  
+  .cardi:hover .cardi__arrow svg {
+    transform: translateX(3px);
+  }
+
+  .cardi:hover {
+    border-color: #008bf8;
+    box-shadow: 0 4px 18px 0 rgba(18, 133, 179, 0.25);
+   }
+
+/* MOBILE & DESKTOP VIEW SECTION */
+
+          /*  SLIDER MOBILE SCREEN */
+
+          @media only screen and (max-width: 600px) {
+          
+            * {
+              box-sizing: border-box;
+            }
+  
+            .slider {
+              width: 400px;
+              text-align: center;
+              overflow: hidden;
+              /* display: flex; */
+              justify-content: center;
+              align-items: center;
+            }
+  
+            .slides {
+              display: flex;
+              
+              overflow-x: auto;
+              scroll-snap-type: x mandatory;
+              
+              
+              
+              scroll-behavior: smooth;
+              -webkit-overflow-scrolling: touch;
+              
+              /*
+              scroll-snap-points-x: repeat(300px);
+              scroll-snap-type: mandatory;
+              */
+            }
+            .slides::-webkit-scrollbar {
+              width: 10px;
+              height: 10px;
+            }
+            .slides::-webkit-scrollbar-thumb {
+              background: black;
+              border-radius: 10px;
+            }
+            .slides::-webkit-scrollbar-track {
+              background: transparent;
+            }
+            .slides > div {
+              scroll-snap-align: start;
+              width: 300px;
+              margin-right: 50px;
+              border-radius: 10px;
+              transform-origin: center center;
+              transform: scale(1);
+              transition: transform 0.5s;
+              position: relative;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 100px;
+            }
+            .slides > div:target {
+                transform: scale(0.9);
+                outline: 2px solid red;
+            }
+            .author-info {
+              background: rgba(0, 0, 0, 0.75);
+              color: white;
+              padding: 0.75rem;
+              text-align: center;
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              margin: 0;
+            }
+            .author-info a {
+              color: white;
+            }
+  
+            .slider > a {
+              display: inline-flex;
+              width: 1.5rem;
+              height: 1.5rem;
+              background: white;
+              text-decoration: none;
+              align-items: center;
+              justify-content: center;
+              border-radius: 50%;
+              margin: 0 0 0.5rem 0;
+              position: relative;
+            }
+            .slider > a:active {
+              top: 50px;
+            }
+            .slider > a:focus {
+              background: #000;
+            }
+            #slider-spacer {
+              margin-top: 1rem;
+            }
+          }
+  
+            /*  SLIDER MOBILE SCREEN */
+  
+  
+            /*  SLIDER DESKTOP SCREEN */
+  
+            @media only screen and (min-width:600px) {
+            
+              
+              * {
+                box-sizing: border-box;
+              }
+            .slider {
+              width: 768px;
+              text-align: center;
+              overflow: hidden;
+              justify-content: center;
+              align-items: center;
+            }
+  
+            .slides {
+              display: flex;
+              
+              overflow-x: auto;
+              scroll-snap-type: x mandatory;
+              
+              
+              
+              scroll-behavior: smooth;
+              -webkit-overflow-scrolling: touch;
+              
+              /*
+              scroll-snap-points-x: repeat(300px);
+              scroll-snap-type: mandatory;
+              */
+            }
+            .slides::-webkit-scrollbar {
+              width: 10px;
+              height: 10px;
+            }
+            .slides::-webkit-scrollbar-thumb {
+              background: black;
+              border-radius: 10px;
+            }
+            .slides::-webkit-scrollbar-track {
+              background: transparent;
+            }
+            .slides > div {
+              scroll-snap-align: start;
+              width: 300px;
+              margin-right: 50px;
+              border-radius: 10px;
+              transform-origin: center center;
+              transform: scale(1);
+              transition: transform 0.5s;
+              position: relative;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 100px;
+            }
+            .slides > div:target {
+              transform: scale(0.9);
+              outline: 2px solid red;
+
+            }
+        
+
+            .author-info {
+              background: rgba(0, 0, 0, 0.75);
+              color: white;
+              padding: 0.75rem;
+              text-align: center;
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              margin: 0;
+            }
+            .author-info a {
+              color: white;
+            }
+  
+            .slider > a {
+              display: inline-flex;
+              background: white;
+              text-decoration: none;
+              align-items: center;
+              justify-content: center;
+              border-radius: 50%;
+              margin: 0 0 0.5rem 0;
+              position: relative;
+            }
+            .slider > a:active {
+              top: 50px;
+            }
+            .slider > a:focus {
+              background: #000;
+            }
+            #slider-spacer {
+              margin-top: 1rem;
+            }
+            }

@@ -1,0 +1,99 @@
+/* --- CAREERS SECTION STYLES --- */
+
+.benefits-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.benefit-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.benefit-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.benefit-icon-wrapper {
+    background: #e6f7ff; /* Light blue background for icon */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px;
+}
+
+.benefit-icon {
+    color: #007bff; /* Primary blue color */
+}
+
+.benefit-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.benefit-description {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* --- APPLICATION CTA SECTION --- */
+
+.application-cta-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.application-box {
+    max-width: 700px;
+    margin: 30px auto 0;
+    padding: 40px;
+    background: #f8f8f8; /* Light grey box */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.application-instruction {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.email-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #007bff; /* Strong blue background */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.email-cta-button:hover {
+    background-color: #0056b3;
+}
+
+.application-note {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #888;
+}

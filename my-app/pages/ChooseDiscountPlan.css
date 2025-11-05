@@ -1,0 +1,43 @@
+/* --- CSS for Single Plan Layout --- */
+
+/* Ensures the single plan card is centered when there is only one item */
+/* --- CSS for Single Plan Layout FIX --- */
+
+/* Ensures the container itself is centered and sized correctly */
+.br-single-plan-focus {
+    /* Override the default grid rules for the single-plan view */
+    display: flex; 
+    justify-content: center; /* Centers the card horizontally */
+    align-items: flex-start; /* Aligns the card vertically to the top */
+    
+    /* Remove width constraints that interfere with flex centering */
+    width: 100%;
+    max-width: none; 
+    
+    margin: 40px auto 60px; /* Provides top/bottom margin */
+}
+
+/* Ensure the plan card itself has a reasonable max width */
+.br-plan-card {
+    /* ... existing styles ... */
+    max-width: 400px; /* Use max-width on the card itself */
+    width: 100%;     /* Ensure it fills available space up to max-width */
+}
+
+/* Price Display */
+.br-price-group {
+    padding: 20px 0;
+    margin: 20px 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    
+    /* FIX: Center the text content (prices and labels) */
+    text-align: center; 
+}
+
+/* Optional: Ensure the price elements inherit the centering */
+.br-price-main, 
+.br-price-onetime {
+    /* Ensure no residual alignment overrides */
+    text-align: center; 
+}

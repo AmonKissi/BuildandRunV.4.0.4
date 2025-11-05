@@ -1,0 +1,75 @@
+
+/* -------------------------------------------------------------------------- */
+/* PARTNERS PAGE STYLES (for ./pages/partners.tsx)                            */
+/* -------------------------------------------------------------------------- */
+
+.partners-grid-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.partners-grid-v2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.partner-card-v2 {
+    background: #ffffff;
+    border-radius: var(--border-radius);
+    padding: 30px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.partner-card-v2:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.partner-logo-wrapper {
+    margin-bottom: 15px;
+}
+
+.partner-logo-img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 3px solid var(--color-accent-blue);
+    padding: 3px;
+}
+
+.partner-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--color-text-dark);
+}
+
+.partner-category {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-accent-blue);
+    margin-bottom: 10px;
+}
+
+.partner-tagline {
+    color: var(--color-text-subtle);
+    font-style: italic;
+    min-height: 40px; /* Ensures consistent vertical rhythm */
+    margin-bottom: 20px;
+}
+
+.partner-view-button {
+    margin-top: auto; /* Pushes button to the bottom */
+}

@@ -1,0 +1,81 @@
+/* -------------------------------------------------------------------------- */
+/* COMPANY PAGE STYLES (for ./pages/company.tsx)                              */
+/* -------------------------------------------------------------------------- */
+
+.company-text-section {
+    padding: 2rem 0 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.company-text-content {
+    max-width: 800px;
+    margin-bottom: 40px;
+    padding: 0 15px;
+    text-align: justify;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: var(--color-text-dark);
+}
+
+.company-text-content p {
+    margin-bottom: 1.5rem; /* Better spacing than <br> */
+}
+
+/* --- Utility Links and Badges --- */
+
+.company-utility-links {
+    max-width: 800px;
+    width: 100%;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+}
+
+.donate-button {
+    background: #ff5722; /* A warm color for donation */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+.donate-button:hover {
+    background: #e64a19;
+}
+
+.social-icons-extra-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.social-icon-extra {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-accent-blue);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.social-icon-extra:hover {
+    color: var(--color-text-dark);
+}
+
+.product-hunt-badge, .instatus-badge {
+    margin-top: 15px;
+}

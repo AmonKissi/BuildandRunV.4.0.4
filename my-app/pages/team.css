@@ -1,0 +1,49 @@
+/* --- TEAM GRID FOR REFERENCE IMAGE (CRITICAL FOR COLUMN LAYOUT) --- */
+.team-grid-reference {
+    /* This makes the cards align in columns */
+    display: grid;
+    /* This creates responsive columns, fitting as many 280px cards as possible */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px; /* Space between cards */
+    padding: 20px 0;
+    justify-content: center; /* Center cards if there are fewer than a full row */
+}
+
+/* --- TEAM CARD STYLES FOR REFERENCE IMAGE (CRITICAL FOR BOX OUTLINING) --- */
+.team-card-reference {
+    position: relative;
+    background-color: white; /* Default background */
+    border-radius: 12px;
+    overflow: hidden; 
+    /* This creates the clean box outline and lift effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); 
+    min-height: 250px; 
+    display: flex;
+    flex-direction: column;
+    padding: 20px; 
+    transition: transform 0.2s ease-in-out;
+}
+
+.team-card-reference:hover {
+    transform: translateY(-3px); /* Slight lift on hover */
+}
+
+/* Specific background colors for cards (adjust these to your exact HEX values) */
+.card-bg-blue-light { background-color: #e6f7ff; /* Lightest blue */ }
+.card-bg-pink-light { background-color: #fff0f5; /* Light blush pink */ }
+.card-bg-yellow-light { background-color: #fffacd; /* Light pale yellow */ }
+.card-bg-gray-light { background-color: #f7f7f7; /* Very light gray */ }
+.card-bg-blue-soft { background-color: #e6f7ff; /* Soft blue */ }
+
+
+/* --- AVATAR IMAGE Positioning (CRITICAL for overlap) --- */
+.team-image-container-reference {
+    position: absolute;
+    bottom: 0; 
+    right: -20px; 
+    width: 180px; 
+    height: 180px; 
+    z-index: 5; 
+}
+
+/* All other necessary styles for text, icons, and responsiveness were provided in the previous turn. */

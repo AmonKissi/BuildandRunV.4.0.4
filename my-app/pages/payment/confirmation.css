@@ -1,0 +1,288 @@
+/* --- Global Styles & Variables (Futuristic Theme) --- */
+:root {
+  --color-dark-bg: #12121e; /* Deep dark background */
+  --color-module-bg: #1e1e30; /* Slightly lighter card background */
+  --color-accent-blue: #00e0ff; /* Neon blue accent */
+  --color-accent-green: #39ff14; /* Neon green for success */
+  --color-text-light: #e0e0e0;
+  --color-text-dim: #9aa0a6;
+  --color-border-dark: #2c2c44;
+  --color-form-input: #12121e;
+  --shadow-glow: 0 0 10px rgba(0, 224, 255, 0.5);
+  --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.4);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-dark-bg);
+  color: var(--color-text-light);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+a { 
+    color: var(--color-accent-blue); 
+    text-decoration: none; 
+    transition: color 0.2s;
+}
+a:hover { 
+    color: #88ffff;
+}
+
+/* --- Wrapper and Container --- */
+.futuristic-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.futuristic-container {
+  max-width: 800px;
+  width: 90%;
+  margin: 40px auto;
+  padding: 0;
+  flex-grow: 1;
+}
+
+/* --- 1. Success Banner --- */
+.success-banner {
+  background: var(--color-module-bg);
+  padding: 40px 30px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  border: 1px solid var(--color-border-dark);
+  margin-bottom: 30px;
+}
+
+.confetti-image {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 15px;
+}
+
+.banner-title {
+  font-size: 2.8rem;
+  color: var(--color-accent-green); /* Neon green success */
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.8);
+  margin-bottom: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.banner-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+  margin-bottom: 25px;
+}
+
+.next-step-indicator {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: var(--color-accent-blue);
+    color: var(--color-dark-bg);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-shadow: 0 0 8px rgba(0, 224, 255, 0.7);
+}
+
+/* --- 2. Domain Form Module --- */
+.domain-form-module {
+  background-color: var(--color-module-bg);
+  padding: 30px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border-dark);
+}
+
+.module-title {
+  font-size: 1.6rem;
+  color: var(--color-accent-blue);
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.activation-note {
+  background-color: #2c2c44;
+  color: var(--color-text-light);
+  padding: 15px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 30px;
+  text-align: center;
+  border-left: 4px solid var(--color-accent-blue);
+}
+
+.activation-steps-list {
+  text-align: left;
+  margin-bottom: 30px;
+  padding-left: 10px;
+}
+
+.activation-steps-list p {
+    margin-bottom: 8px;
+    color: var(--color-text-dim);
+    font-size: 0.95rem;
+}
+
+.domain-link {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.domain-activation-form {
+  text-align: left;
+}
+
+.form-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+.form-input {
+  padding: 12px 15px;
+  background-color: var(--color-form-input);
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--color-accent-blue);
+  outline: none;
+  box-shadow: var(--shadow-glow);
+}
+
+.form-checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 25px;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+  color: var(--color-text-dim);
+}
+
+.form-checkbox-group input {
+  margin-right: 10px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  accent-color: var(--color-accent-blue);
+}
+
+.submit-activation-button {
+  width: 100%;
+  padding: 18px;
+  background-color: var(--color-accent-blue);
+  color: var(--color-dark-bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  letter-spacing: 1px;
+}
+
+.submit-activation-button:hover {
+  background-color: #88ffff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* --- 3. Footer --- */
+.futuristic-footer {
+  background-color: var(--color-dark-bg);
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--color-text-dim);
+  border-top: 1px solid var(--color-border-dark);
+  margin-top: 50px;
+}
+
+.footer-status {
+    font-size: 0.9rem;
+    color: var(--color-accent-green);
+    margin-bottom: 20px;
+}
+
+.social-icon-list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.social-icon-wrapper {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s;
+}
+
+.social-icon-item a:hover .social-icon-wrapper {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-glow);
+  border-radius: 4px;
+}
+
+.social-icon-wrapper img {
+  filter: invert(1) hue-rotate(180deg) saturate(2); /* Makes icons white/light blue */
+}
+
+.footer-menu-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 15px;
+  gap: 20px;
+}
+
+.menu-link {
+  color: var(--color-text-dim);
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+.menu-link:hover {
+  color: var(--color-accent-blue);
+}
+
+.copyright-text {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .banner-title {
+    font-size: 2rem;
+  }
+  .form-fields-grid {
+    grid-template-columns: 1fr;
+  }
+  .domain-form-module {
+    padding: 20px;
+  }
+}

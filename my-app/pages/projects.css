@@ -1,0 +1,211 @@
+/* -------------------------------------------------------------------------- */
+/* PROJECTS PAGE STYLES (for ./pages/projects.tsx)                            */
+/* -------------------------------------------------------------------------- */
+
+.projects-header {
+    margin-bottom: 3rem; /* Tighter header spacing */
+}
+
+/* --- Terminal Status Section --- */
+.terminal-section {
+    margin-bottom: 5rem;
+}
+
+.terminal-container {
+    background-color: var(--color-text-dark); /* Dark background for terminal look */
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.terminal-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background-color: #374151; /* Darker header bar */
+    color: #f3f4f6;
+    border-bottom: 1px solid #4b5563;
+}
+
+.terminal-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: default;
+}
+.terminal-btn-red { background-color: #ef4444; }
+.terminal-btn-yellow { background-color: #f59e0b; }
+.terminal-btn-green { background-color: #10b981; }
+
+.terminal-body {
+    padding: 1rem;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+    color: #d1d5db;
+}
+
+.terminal-prompt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    line-height: 1.5;
+}
+
+.terminal-user {
+    color: var(--color-highlight-cyan); /* Using a secondary highlight color for user */
+    margin-right: 0.25rem;
+}
+
+.terminal-location {
+    color: #9ca3af;
+    margin-right: 0.5rem;
+}
+
+.terminal-bling {
+    color: #10b981; /* Green text for the "git status" command */
+    margin-right: 1rem;
+}
+
+.terminal-key-item {
+    display: flex;
+    align-items: center;
+    margin-right: 1.5rem;
+    color: #e5e7eb;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+}
+.status-dot.green { background-color: #10b981; }
+.status-dot.yellow { background-color: #f59e0b; }
+.status-dot.orange { background-color: #f97316; }
+.status-dot.red { background-color: #ef4444; }
+
+.terminal-cursor {
+    width: 8px;
+    height: 1em;
+    background-color: #e5e7eb;
+    display: inline-block;
+    margin-left: 0.5rem;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { visibility: visible; }
+    50% { visibility: hidden; }
+}
+
+/* --- Projects Grid --- */
+.projects-grid-section {
+    margin-bottom: 5rem;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    display: flex;
+    align-items: center;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    text-align: left;
+}
+
+.project-card:hover {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 4px 15px rgba(57, 132, 248, 0.15); /* Using the final brand blue for shadow */
+    transform: translateY(-3px);
+}
+
+.project-icon-box {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: var(--color-bg-light); /* Icons are white */
+}
+
+.project-icon-box svg {
+    stroke-width: 2.5;
+}
+
+/* Icon Box Background Colors matching status */
+.project-icon-box-green { background-color: #10b981; }
+.project-icon-box-orange { background-color: #f97316; }
+.project-icon-box-yellow { background-color: #f59e0b; }
+.project-icon-box-red { background-color: #ef4444; }
+
+
+.project-info {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.project-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: var(--color-accent-blue);
+}
+
+.project-description {
+    font-size: 0.9rem;
+    color: var(--color-text-subtle);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.project-status {
+    flex-shrink: 0;
+    margin-left: 1rem;
+    text-align: right;
+}
+
+.project-status-text {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+.status-green { color: #10b981; }
+.status-orange { color: #f97316; }
+.status-yellow { color: #f59e0b; }
+.status-red { color: #ef4444; }
+
+/* --- Info Commands Section (reusing utility styles) --- */
+.info-commands-section {
+    margin-bottom: 5rem;
+}
+
+.info-commands-grid {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}

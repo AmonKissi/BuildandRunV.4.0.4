@@ -1,0 +1,155 @@
+/* -------------------------------------------------------------------------- */
+/* PLAN PAGE STYLES (for ./pages/plan.tsx)                                    */
+/* -------------------------------------------------------------------------- */
+
+/* --- Simple Top Nav --- */
+.plan-header-nav {
+    display: flex;
+    justify-content: flex-start; /* Aligns link to the left */
+    padding: 1rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.plan-homepage-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-subtle);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.plan-homepage-link:hover {
+    color: var(--color-accent-blue);
+}
+
+/* --- Plan Page Header --- */
+.plan-header {
+    padding-top: 2rem; /* Reduced top padding since nav is above */
+    margin-bottom: 4rem;
+}
+
+.template-buttons-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+/* --- New Pricing Grid Styles --- */
+.pricing-grid-section {
+    padding: 2rem 0 5rem;
+}
+
+.pricing-grid-v2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    align-items: stretch; /* Makes cards equal height */
+}
+
+.plan-card-v2 {
+    background-color: #f9fafb;
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.plan-card-recommended {
+    background-color: var(--color-bg-light);
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 10px 40px rgba(57, 132, 248, 0.2); /* Using the final brand blue */
+    transform: scale(1.05);
+}
+
+.plan-card-v2:not(.plan-card-recommended):hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--color-shadow);
+}
+
+.plan-badge-recommended {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-accent-blue);
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 99px;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.plan-title-v2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.plan-description-v2 {
+    color: var(--color-text-subtle);
+    font-size: 1rem;
+    min-height: 3.2rem; /* Ensures consistent height for 1 or 2 lines */
+}
+
+.plan-price-group {
+    margin: 1.5rem 0;
+}
+
+.plan-price-main {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-accent-blue);
+    line-height: 1.1;
+}
+
+.plan-price-suffix {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-subtle);
+}
+
+.plan-price-onetime {
+    font-size: 0.875rem;
+    color: var(--color-text-subtle);
+    margin-top: 0.25rem;
+}
+
+.plan-features-list-v2 {
+    text-align: left;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    flex-grow: 1; /* Pushes the button up (requires cta button to be before it) */
+}
+
+/* Re-ordering for flex-grow to work */
+.plan-card-v2 .cta-button {
+    margin-top: 1.5rem;
+    order: 10; /* Make button appear last */
+}
+.plan-features-list-v2 {
+    order: 5; /* Make features list appear before button */
+}
+
+
+.plan-features-list-v2 li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-dark);
+    font-weight: 500;
+}
+
+.plan-feature-icon {
+    color: var(--color-accent-blue);
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+}
