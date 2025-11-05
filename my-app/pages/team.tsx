@@ -32,7 +32,7 @@ const TEAM_MEMBERS = [
         color: "pink-light", 
     },
     {
-        name: "Kelvin",
+        name: "Mike",
         role: "Application Developer\nSoftware Engineer",
         image: "/team-old/img/team/kelvin.jpg",
         color: "yellow-light", 
