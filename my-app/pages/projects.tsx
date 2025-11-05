@@ -31,7 +31,7 @@ import BRLogoOfficial from "../public/img/logo/logo-official.png";
 // Statuses: 🟢 Done, 🟠 Incomplete, 🟡 InProgress, 🔴 Critical
 const PROJECTS = [
     // Project #11
-    { title: "Todos", date: "May 2023", status: "🟢", desc: "Create a list of your to-dos", link: "https://todos.buildandrun.net", icon: Zap },
+    { title: "Todos", date: "May 2023", status: "🔴", desc: "Create a list of your to-dos", link: "https://todos.buildandrun.net", icon: Zap },
     // Project #10
     { title: "Images", date: "April 2023", status: "🟢", desc: "All images from the year 2011 to 2023", link: "https://images.buildandrun.net", icon: ImageIcon },
     // Project #9
@@ -39,15 +39,15 @@ const PROJECTS = [
     // Project #8
     { title: "Debit Card", date: "March 2023", status: "🟢", desc: "Use this tool for all your free trials", link: "./projects/debit-card", icon: CreditCard },
     // Project #7
-    { title: "Blog", date: "December 2022", status: "🟢", desc: "New blog experience for you and your friends", link: "https://blog.buildandrun.net", icon: FileText },
+    { title: "Blog", date: "December 2022", status: "🟠", desc: "New blog experience for you and your friends", link: "https://blog.buildandrun.net", icon: FileText },
     // Project #6
     { title: "Admin Panel", date: "November 2022", status: "🟢", desc: "Manage password, email, site, and subscription", link: "https://admin.buildandrun.net/login", icon: Activity },
     // Project #5
-    { title: "Logo and Favicon", date: "October 2021", status: "🟢", desc: "Simple logo and favicon generator", link: "http://brstore.ddns.net/tech/projects/simple-logo/", icon: Globe },
+    { title: "Logo and Favicon", date: "October 2021", status: "🔴", desc: "Simple logo and favicon generator", link: "http://brstore.ddns.net/tech/projects/simple-logo/", icon: Globe },
     // Project #4
-    { title: "Password Generator", date: "April 2021", status: "🟢", desc: "Generate password with up to 32 characters", link: "http://brstore.ddns.net/tech/projects/password-generator/", icon: Lock },
+    { title: "Password Generator", date: "April 2021", status: "🔴", desc: "Generate password with up to 32 characters", link: "http://brstore.ddns.net/tech/projects/password-generator/", icon: Lock },
     // Project #3
-    { title: "Media Panel", date: "December 2020", status: "🟠", desc: "Your marketing tool for all your socials", link: "https://media.buildandrun.net", icon: AlertTriangle },
+    { title: "Media Panel", date: "December 2020", status: "🔴", desc: "Your marketing tool for all your socials", link: "https://media.buildandrun.net", icon: AlertTriangle },
     // Project #2
     { title: "Tweak Apps", date: "November 2020", status: "🟢", desc: "Applications that can simplify your online life", link: "./tweak-apps", icon: Wrench },
     // Project #1

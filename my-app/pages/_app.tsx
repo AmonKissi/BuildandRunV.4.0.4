@@ -9,10 +9,8 @@ import './faq.css';
 import './projects.css';
 import './company.css';
 import './payment/confirmation.css';
-import './projects/debit-card.css';
 import './access/link.css';
 import './maintenance/upgrade.css';
-import './workstation/client/mecp.css';
 import './privacy-policy.css';
 import './terms-of-service.css';
 

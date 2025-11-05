@@ -1,30 +1,97 @@
-  /*
-   * Build and Run v.2.0.2 CSS.
-   *
-   * Note: The corresponding styles are in the ./tweak-apps.css file.
-   */
+/*
+ * Build and Run v.2.0.2 CSS - CLEANED AND FIXED.
+ *
+ * FIXES:
+ * 1. Removed all 'background-image: url(...)' lines to resolve 'Module not found' error.
+ * 2. Introduced .tweak-apps-grid for wrapping, multi-column desktop layout.
+ * 3. Cleaned up the .tweak-image to properly center the Lucide icons and ensure a clean background.
+ */
+
+/* --- Page/Section Containers --- */
 
 .tweak-apps {
     margin-top: 3rem;
     margin-bottom: 3rem;
-  }
-  .tweak-title {
-  font-size: xx-large;
-  font-weight: bold;
-  }
-  .number-selector {
-    margin-top: 1rem;
-  }
-  
-.tweak-image {
-    width: 100px;
-    height: auto;
+    /* Adding max-width and centering for a standard page layout */
+    max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
-    align-items: center;
-    margin-bottom: -4rem;
-    margin-top: -2rem;
+    padding: 0 20px; 
 }
+
+.tweak-title {
+  font-size: xx-large;
+  font-weight: bold;
+  margin-bottom: 1.5rem; 
+}
+
+.number-selector {
+    margin-top: 1rem;
+}
+
+/* --- NEW: Desktop Grid Container for Cards --- */
+/* This is REQUIRED to make the cards wrap and form a grid on larger screens. */
+.tweak-apps-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+    justify-content: flex-start; 
+    padding-bottom: 20px;
+}
+
+/* --- Card Component Styling (cardi) --- */
+
+.cardi {
+    --border-radius: 0.75rem;
+    --primary-color: #7257fa;
+    --secondary-color: #3c3852;
+    width: 210px; /* Keep original fixed width */
+    min-height: 210px;
+    
+    font-family: "Arial";
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    background: #f1f1f3; /* Light background for the card */
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 3%);
+    position: relative;
+    margin-bottom: 0.2rem;
+    
+    /* Ensure card respects the flex container */
+    flex-grow: 0; 
+    flex-shrink: 0;
+}
+  
+/* --- Icon Containers (tweak-image) --- */
+
+.tweak-image {
+    width: 100px;
+    height: 80px; /* Slightly reduced height for better alignment */
+    
+    /* Centering the icon */
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* FIX: Reduced negative margins from the original CSS to avoid breaking the layout */
+    margin-bottom: 0.5rem; 
+    margin-top: -1.5rem;
+    
+    /* Center the Lucide SVG icon inside the container and give it a clean background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff; /* Clean white background for the icon container */
+    border-radius: 10px;
+}
+
+/* Style for the Lucide SVG icon inside .tweak-image */
+.tweak-image svg {
+    width: 60px; /* Sizing the actual icon */
+    height: 60px;
+    color: var(--primary-color, #7257fa); /* Icon color */
+}
+
+/* Specific overrides from original CSS (kept but simplified) */
 .tweak-image-title {
   width: 200px;
   height: auto;
@@ -53,30 +120,11 @@
 #cryptocurrencies-image {
   padding-top: 1rem;
   padding-bottom: 1rem;
-
 }
 
-/* DESIGN OF BOX */
+/* --- Card Content & Hover (Unchanged from user's original) --- */
 
-.cardi {
-    --border-radius: 0.75rem;
-    --primary-color: #7257fa;
-    --secondary-color: #3c3852;
-    width: 210px;
-    min-height: 210px;
-    
-
-    font-family: "Arial";
-    padding: 1rem;
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    background: #f1f1f3;
-    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 3%);
-    position: relative;
-    margin-bottom: 0.2rem;
-  }
-  
-  .cardi .cardi__content {
+.cardi .cardi__content {
     color: var(--secondary-color);
     font-size: 0.86rem;
     display: block;
@@ -132,9 +180,9 @@
     box-shadow: 0 4px 18px 0 rgba(18, 133, 179, 0.25);
    }
 
-/* MOBILE & DESKTOP VIEW SECTION */
+/* --- MOBILE & DESKTOP VIEW SECTION (Slider logic remains unchanged) --- */
 
-          /*  SLIDER MOBILE SCREEN */
+          /* SLIDER MOBILE SCREEN */
 
           @media only screen and (max-width: 600px) {
           
@@ -234,10 +282,10 @@
             }
           }
   
-            /*  SLIDER MOBILE SCREEN */
+            /* SLIDER MOBILE SCREEN */
   
   
-            /*  SLIDER DESKTOP SCREEN */
+            /* SLIDER DESKTOP SCREEN */
   
             @media only screen and (min-width:600px) {
             

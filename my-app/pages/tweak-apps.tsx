@@ -1,12 +1,14 @@
-import Image from "next/image";
-import BRlogo from "../public/img/logo/BRlogo.png";
-import mBRlogo from "../public/img/logo/mBRlogo.png";
-import Facebook from "../public/img/footer/logo-facebook.svg";
-import Twitter from "../public/img/footer/logo-twitter.svg";
-import Instagram from "../public/img/footer/logo-instagram.svg";
-import Youtube from "../public/img/footer/logo-youtube.svg";
+import React from 'react';
+import {
+    Zap,          // Speed (Used in Hero CTA)
+    Heart,        // Footer icon
+    Code,         // Projects/Source
+    ExternalLink, // Card Link Icon
+} from 'lucide-react';
+import Image from 'next/image';
+import BRLogoMain from '../public/img/logo/logo-official.png'; 
+// ----- TWEAK APP IMAGES ----- //
 
-// ----- TWEAK IMAGE ----- //
 // ----- MOVIES ----- //
 import kickass from "../public/img/tweak-apps/movies/kickass.png";
 import fmovies from "../public/img/tweak-apps/movies/fmovies.png";
@@ -14,6 +16,7 @@ import popcorn from "../public/img/tweak-apps/movies/popcorn.png";
 import putlocker from "../public/img/tweak-apps/movies/putlocker.png";
 import showbox from "../public/img/tweak-apps/movies/showbox.png";
 import putlockermovies from "../public/img/tweak-apps/movies/putlocker-movies-space.png";
+
 // ----- AI & BOTS ----- //
 import chatgpt from "../public/img/tweak-apps/ai-bots/chatgpt.png";
 import writesonic from "../public/img/tweak-apps/ai-bots/writesonic.png";
@@ -30,6 +33,7 @@ import soundbolt from "../public/img/tweak-apps/ai-bots/soundbolt.png";
 import naturalreader from "../public/img/tweak-apps/ai-bots/naturalreader.png";
 import cleverbot from "../public/img/tweak-apps/ai-bots/cleverbot.png";
 import animaker from "../public/img/tweak-apps/ai-bots/animaker.png";
+
 // ----- EDITORS ----- //
 import inshot from "../public/img/tweak-apps/editors/inshot.png";
 import lightricks from "../public/img/tweak-apps/editors/lightricks.png";
@@ -37,6 +41,7 @@ import noelshack from "../public/img/tweak-apps/editors/noelshack.png";
 import photoshopfix from "../public/img/tweak-apps/editors/photoshopfix.png";
 import removebged from "../public/img/tweak-apps/editors/removebged.png";
 import iloveimg from "../public/img/tweak-apps/editors/iloveimg.png";
+
 // ----- CRYPTOCURRENCIES ----- //
 import algorand from "../public/img/tweak-apps/cryptocurrencies/algorand.png";
 import binance from "../public/img/tweak-apps/cryptocurrencies/binance.png";
@@ -53,1348 +58,251 @@ import tether from "../public/img/tweak-apps/cryptocurrencies/tether.png";
 import uniswap from "../public/img/tweak-apps/cryptocurrencies/uniswap.png";
 
 
+// --- LOGO NOTE ---
+// The following import is commented out because it requires access to your local file system
+// and the Next.js environment to resolve the path. You should UNCOMMENT this when running LOCALLY.
+// import BRLogoMain from '../public/img/logo/logo-official.png';
 
-// import  from "../public/img/tweak-apps/cryptocurrencies/.png";
+// --- DATA STRUCTURE: Tweak App Data ---
+const getPlaceholderImage = (text: string) => 
+    `https://placehold.co/40x40/0070f3/ffffff?text=${text.slice(0, 1)}`;
+
+const TWEAK_DATA_BY_SECTION = [
+    {
+        title: "Movies 🎬",
+        description: "Explore the most popular movie applications and software that grant you access to watch all the latest films and series at no cost.",
+        apps: [
+            { name: "Kickass Torrents", url: "https://kickass.sx/home/", rating: 3, image: kickass, content: "Download recent and new movies using torrent clients." },
+            { name: "FMovies", url: "https://ww4.fmovies.co/24/", rating: 4, image: fmovies, content: "Watch movies online for free (No account needed)." },
+            { name: "Popcorn Time", url: "https://github.com/popcorn-official/popcorn-desktop/releases", rating: 5, image: popcorn, content: "Stream movies in HD via P2P. Works on all devices." },
+            { name: "Putlocker", url: "https://www2.putlockers.ws/", rating: 2, image: putlocker, content: "Online streaming of movies (varies in availability)." },
+            { name: "Putlocker Movies Space", url: "https://putlocker-movies.space/", rating: 3, image: putlockermovies, content: "Alternative Putlocker movie streaming site." },
+            { name: "Showbox", url: "https://bestforandroid.com/apk/showbox/", rating: 1, image: showbox, content: "Android-only movie streaming app." },
+        ],
+    },
+    {
+        title: "AI & Bots 🤖",
+        description: "Discover cutting-edge AI tools for creativity, automation, productivity, and intelligent content generation.",
+        apps: [
+            { name: "ChatGPT", url: "https://openai.com/chatgpt", rating: 5, image: chatgpt, content: "Leading AI assistant for conversation, ideas, and writing." },
+            { name: "Writesonic", url: "https://writesonic.com/", rating: 4, image: writesonic, content: "AI writer for blogs, ads, and marketing content." },
+            { name: "Midjourney", url: "https://www.midjourney.com/", rating: 5, image: midjourney, content: "Create stunning AI-generated images." },
+            { name: "Remove.bg", url: "https://www.remove.bg/", rating: 4, image: removebg, content: "Instant image background removal tool." },
+            { name: "QuillBot", url: "https://quillbot.com/", rating: 4, image: quillbot, content: "Smart paraphrasing and rewriting assistant." },
+
+            // ---- Missing apps now added ---- //
+            { name: "Image Color Picker", url: "https://imagecolorpicker.com/", rating: 3, image: imagecolorpicker, content: "Extract color codes from any image." },
+            { name: "SiteSucker", url: "https://ricks-apps.com/osx/sitesucker/", rating: 3, image: sitesucker, content: "Download entire websites for offline use." },
+            { name: "Splitter", url: "https://splitter.ai/", rating: 4, image: splitter, content: "Separate vocals and beat from any song." },
+            { name: "Somiibo", url: "https://somiibo.com/", rating: 3, image: somiibo, content: "Growth bot for social media and music platforms." },
+            { name: "Donotpay", url: "https://donotpay.com/", rating: 3, image: donotpay, content: "The world's first AI legal assistant." },
+            { name: "Loom", url: "https://www.loom.com/", rating: 4, image: loom, content: "Instant screen recording and video messaging tool." },
+            { name: "Soundbolt", url: "https://soundbolt.ai/", rating: 3, image: soundbolt, content: "AI powered text to speech and audio tools." },
+            { name: "NaturalReader", url: "https://www.naturalreaders.com/", rating: 4, image: naturalreader, content: "Converts text to lifelike speech." },
+            { name: "Cleverbot", url: "https://www.cleverbot.com/", rating: 2, image: cleverbot, content: "Classic conversational AI chatbot." },
+            { name: "Animaker", url: "https://www.animaker.com/", rating: 4, image: animaker, content: "Create animated videos quickly and easily." },
+        ],
+    },
+    {
+        title: "Editors 🎨",
+        description: "Professional-grade tools for editing videos, photos, documents, and promotional content.",
+        apps: [
+            { name: "InShot", url: "https://inshot.com/", rating: 4, image: inshot, content: "Mobile video + image editing suite." },
+            { name: "Lightricks", url: "https://www.lightricks.com/", rating: 5, image: lightricks, content: "Premium editing and design apps." },
+            { name: "Noelshack", url: "https://noelshack.com/", rating: 3, image: noelshack, content: "Quick image storing and sharing tool." },
+            { name: "Photoshop Fix", url: "https://adobe-photoshop-fix.en.softonic.com/", rating: 4, image: photoshopfix, content: "Mobile Photoshop retouching features." },
+            { name: "Remove.bg Editor", url: "https://www.remove.bg/", rating: 4, image: removebged, content: "Advanced background removal + editing." },
+            { name: "iLoveIMG", url: "https://www.iloveimg.com/", rating: 4, image: iloveimg, content: "Resize, compress, crop, convert images online." },
+        ],
+    },
+    {
+        title: "Cryptocurrencies 🪙",
+        description: "Essential exchanges, tokens, and decentralized blockchain platforms.",
+        apps: [
+            { name: "Binance", url: "https://www.binance.com/", rating: 5, image: binance, content: "Largest crypto exchange globally." },
+            { name: "Bitcoin", url: "https://bitcoin.org/", rating: 5, image: bitcoin, content: "First decentralized cryptocurrency." },
+            { name: "Ethereum", url: "https://ethereum.org/en/", rating: 5, image: ethereum, content: "Smart contracts and decentralized apps." },
+            { name: "Solana", url: "https://solana.com/", rating: 5, image: solana, content: "High-speed blockchain platform." },
+            { name: "Polygon", url: "https://polygon.technology/", rating: 4, image: polygon, content: "Ethereum scaling solution." },
+            { name: "Algorand", url: "https://www.algorand.com/", rating: 4, image: algorand, content: "Secure and scalable blockchain network." },
+            
+            // ---- Missing cryptos now added ---- //
+            { name: "Cardano", url: "https://cardano.org/", rating: 4, image: cardano, content: "Research-driven blockchain platform." },
+            { name: "Polkadot", url: "https://polkadot.network/", rating: 4, image: polkadot, content: "Cross-chain interoperability blockchain." },
+            { name: "Internet Computer", url: "https://internetcomputer.org/", rating: 3, image: internetcomputer, content: "Decentralized cloud computing network." },
+            { name: "Rally", url: "https://rally.io/", rating: 3, image: rally, content: "Creator-focused cryptocurrency ecosystem." },
+            { name: "Shiba Inu", url: "https://shibatoken.com/", rating: 3, image: shibainu, content: "Community-driven meme token." },
+            { name: "Tether (USDT)", url: "https://tether.to/", rating: 5, image: tether, content: "Most used stablecoin pegged to USD." },
+            { name: "Uniswap", url: "https://uniswap.org/", rating: 4, image: uniswap, content: "Decentralized exchange protocol." },
+        ],
+    },
+];
 
 
-export function Index() {
+// --- CARD COMPONENT (Replicating the 'cardi' structure) ---
+const TweakAppCard = ({ app }: { app: (typeof TWEAK_DATA_BY_SECTION[0]['apps'][0]) }) => {
+    // Determine the color based on rating for a visual hint
+    const ratingColor = app.rating >= 4 ? 'text-yellow-500' : app.rating >= 2 ? 'text-yellow-400' : 'text-gray-400';
+    const stars = '⭐'.repeat(app.rating);
 
-  /*
-   * Build and Run v.2.0.2 Index.
-   *
-   * Note: The corresponding styles are in the ./tweak-apps.css file.
-   */
+    return (
+        <a 
+            href={app.url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            // Applying existing CSS classes: cardi, shadow, rounded-xl, etc.
+            className="cardi p-4 bg-white rounded-xl shadow-md border border-gray-200 hover:border-blue-500 transition duration-200 flex flex-col space-y-3 cursor-pointer"
+        >
+            <div className="app-row flex items-center space-x-3">
+                <div className="tweak-image flex-shrink-0">
+                    <Image 
+  src={app.image}
+  alt={app.name}
+  width={40}
+  height={40}
+  className="rounded-lg object-cover border border-gray-100"
+/>
 
-  return (
-    <div className="wrapper">
-      <div className="container">
-        <div id="mBRlogo" className="show-on-desktop hide-on-mobile">
-          <Image src={mBRlogo} alt="mBRlogo" />
+                </div>
+                <h3 className="cardi__title text-lg font-semibold text-gray-800 leading-tight flex-grow">
+                    {app.name}
+                </h3>
+            </div>
+            <div className="app-row">
+                <p className="cardi__content text-sm text-gray-500">
+                    {app.content}
+                </p>
+            </div>
+            <div className="flex justify-between items-center pt-2 border-t border-gray-100">
+                <div className={`cardi__date font-medium ${ratingColor}`}>
+                    {stars}
+                </div>
+                <div className="cardi__arrow text-blue-500">
+                    <ExternalLink size={16} />
+                </div>
+            </div>
+        </a>
+    );
+};
+
+
+// --- MAIN COMPONENT ---
+const TweakApps = () => {
+    const currentYear = new Date().getFullYear();
+
+    return (
+        // Applying the light mode and base styling classes from styles.css
+        <div className="landing-wrapper bg-white text-gray-800 font-sans min-h-screen" data-theme="light"> 
+            <div className="landing-container">
+                
+                {/* 1. HERO SECTION (Matching index.tsx structure) */}
+                <header className="hero-section text-center">
+                    <div className="header-logo-container">
+                        <div className="flex justify-center" style={{ width: 200, height: 100 }}>
+
+                            <div className="flex items-center justify-center w-full h-full bg-blue-50 border border-blue-200 text-lg font-black text-blue-800 rounded-lg">
+                                <Image src={BRLogoMain} alt="Build & Run Logo" width={200} height={100} layout="fixed" />
+                            </div>
+                            {/* --- END: YOUR NEXT.JS LOGO CODE --- */}
+                        </div>
+                    </div>
+
+                    <h1 className="hero-title">
+                        <span className="text-accent-blue">Introducing The Future</span>
+                        <br/>
+                        Tweak Apps 👾
+                    </h1>
+                    
+                    <p className="hero-subtitle">
+                        The Tweak Apps section is your one-stop-shop for finding applications and software that can simplify your online life, all curated by Build & Run.
+                    </p>
+                    
+                    <div className="hero-cta-group">
+                        <a href="./plan" className="cta-button primary-cta">
+                            View All Plans 🚀
+                        </a>
+                        <a href="#tweak-list" className="cta-button secondary-cta">
+                            Explore Tweaks Now <Zap size={20} className="ml-2" />
+                        </a>
+                    </div>
+                </header>
+
+                {/* --- TWEAK APPS MAIN CONTENT --- */}
+                <section id="tweak-list" className="tweak-apps features-section">
+                    
+                    <h2 className="section-title">
+                        Curated App Categories
+                    </h2>
+
+                    {TWEAK_DATA_BY_SECTION.map((section, sectionIndex) => (
+                        <div key={sectionIndex} className="mb-20">
+                            
+                            {/* SECTION TITLE BLOCK: Centered */}
+                            <div className="movies mb-6 text-center">
+                                <div className="tweak-title mb-2">
+                                    <h1 className="text-3xl font-bold">{section.title}</h1>
+                                </div>
+                                {/* Description with better font/spacing */}
+                                <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                                    {section.description}
+                                </p>
+                            </div>
+
+                            {/* TWEAK CARD SLIDER/GRID: Increased gap/spacing to space-x-6 */}
+                            <div className="slider overflow-x-auto whitespace-nowrap py-4" id={`slider-spacer-${sectionIndex}`}>
+                                <div className="slides flex space-x-6 pb-2">
+                                    {section.apps.map((app, appIndex) => (
+                                        <div 
+                                            key={appIndex} 
+                                            id={`${app.name.toLowerCase().replace(/\s/g, '-')}-${appIndex + 1}`}
+                                            className="inline-block w-[320px] flex-shrink-0"
+                                        >
+                                            <TweakAppCard app={app} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            
+                          {/* NUMBER SELECTOR: Updated to be bigger and bolder */}
+                            <div className="number-selector flex justify-center items-center mt-6 text-gray-700">
+                                {section.apps.map((app, appIndex) => (
+                                    <React.Fragment key={appIndex}>
+                                        <a href={`#${app.name.toLowerCase().replace(/\s/g, '-')}-${appIndex + 1}`} 
+                                           className="text-2xl font-extrabold hover:text-blue-600 transition duration-150 inline-block px-3 py-1"
+                                        >
+                                            {/* Displaying actual index + 1 */}
+                                            {appIndex + 1}
+                                        </a>
+                                        {appIndex < section.apps.length - 1 && <span className="text-xl font-light text-gray-400 mx-2">|</span>}
+                                    </React.Fragment>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </section>
+                
+
+            </div>
+            
+            {/* FOOTER - Social links removed */}
+            <footer className="footer-new">
+                <div className="footer-content">
+                    {/* Left side: Links group */}
+                    <div className="footer-links-group">
+                        <a className="footer-link" href="./company">Company</a>
+                        <a className="footer-link" href="./partners">Partners</a>
+                        <a className="footer-link" href="./privacy-policy">Privacy</a>
+                        <a className="footer-link" href="./terms-of-service">Terms</a>
+                        <a className="footer-link" href="https://www.dmca.com/compliance/buildandrun.net" target="_blank" rel="noopener noreferrer">DMCA.com</a>
+                        <a className="footer-link" href="./projects">Projects <Code size={16} className="inline ml-0.5" /></a>
+                    </div>
+                </div>
+                <p className="copyright">
+                    &copy;{currentYear} B&R | All Rights Reserved. Crafted with <Heart size={16} className="text-red-500 heart-icon inline ml-0.5"/> 
+                </p>
+            </footer>
         </div>
-
-        <div id="welcome">
-          <h1>
-            <span> Introducing The Future</span>
-            Tweak Apps 👾
-          </h1>
-        </div>
-        <div id="description">
-          <span>The Tweak Apps section is your one-stop-shop for finding applications and software that can simplify your online life.</span>
-          <div></div>
-          <span></span>
-        </div>
-
-        <div id="hero" className="rounded">
-          <div className="text-container">
-            <h2>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                />
-              </svg>
-              <span>You&apos;re up and running</span>
-            </h2>
-            <div className="blinker">
-              <a href="./"> Homepage</a>
-            </div>
-          </div>
-          <div className="logo-container">
-            <svg
-              fill="currentColor"
-              role="img"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            ></svg>
-            <Image src={BRlogo} alt="BRlogo" />
-          </div>
-        </div>
-
-        {/* TWEAK APPS  */}
-
-        <div className="tweak-apps">
-
-          {/* SECTION  */}
-
-          <div className="movies">
-            <div className="tweak-title">
-              <h1>Movies 🎬</h1>
-            </div>
-            <p>Most popular movie apps that allow you to watch all movies for free.</p>
-            <div className="slider" id="slider-spacer">
-              <div className="slides">
-                <div id="movies-1">
-                  {/* MODULE */}
-                  <div><a href="https://kickass.sx/home/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image">
-                          <Image src={kickass} alt="kickass" />
-                        </div>
-                        <h3 className="cardi__title">Kickass Torrents
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">All recent and new movies (Download µTorrent or BitTorrent) </p>
-                      </div>
-                      <div className="cardi__date">
-                        ⭐⭐⭐
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="movies-2">
-                  {/* MODULE */}
-                  <div><a href="https://ww4.fmovies.co/24/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image">
-                          <Image src={fmovies} alt="fmovies" />
-                        </div>
-                        <h3 className="cardi__title">FMovies
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">All recent and new movies (Online Users Only) </p>
-                      </div>
-                      <div className="cardi__date">
-                        ⭐⭐⭐⭐
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="movies-3">
-                  {/* MODULE */}
-                  <div><a href="https://github.com/popcorn-official/popcorn-desktop/releases" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image">
-                          <Image src={popcorn} alt="popcorn" />
-                        </div>
-                        <h3 className="cardi__title">Popcorn Time
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">All recent and new movies (Runs on all devices)</p>
-                      </div>
-                      <div className="cardi__date">
-                        ⭐⭐⭐⭐⭐
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="movies-4">
-                  {/* MODULE */}
-                  <div><a href="https://www2.putlockers.ws/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image">
-                          <Image src={putlocker} alt="putlocker" />
-                        </div>
-                        <h3 className="cardi__title">Putlocker
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">All recent and new movies (Online Users Only)</p>
-                      </div>
-                      <div className="cardi__date">
-                        ⭐⭐
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="movies-5">
-                     {/* MODULE */}
-                    <div><a href="https://putlocker-movies.space/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image-movie-five">
-                          <Image src={putlockermovies} alt="putlockermovies" />
-                        </div>
-                        <h3 className="cardi__title">Putlocker Movies Space
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">All recent and new movies (Online Users Only)</p>
-                      </div>
-                      <div className="cardi__date">
-                        ⭐⭐⭐
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="movies-6">
-                   {/* MODULE */}
-                   <div><a href="https://bestforandroid.com/apk/showbox/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image">
-                          <Image src={showbox} alt="showbox" />
-                        </div>
-                        <h3 className="cardi__title">Showbox
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">All recent and new movies (Android Users Only)</p>
-                      </div>
-                      <div className="cardi__date">
-                        ⭐
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-
-              </div>
-              <div className="number-selector">
-                <a href="#movies-1">1️⃣</a>ㅤ|
-                ㅤ<a href="#movies-2">2️⃣</a>ㅤ|
-                ㅤ<a href="#movies-3">3️⃣</a>ㅤ|
-                ㅤ<a href="#movies-4">4️⃣</a>ㅤ|
-                ㅤ<a href="#movies-5">5️⃣</a>ㅤ|
-                ㅤ<a href="#movies-6">6️⃣</a>
-              </div>
-            </div>
-          </div>
-          {/* SECTION  */}
-          <div className="divider2"></div>
-          {/* SECTION  */}
-
-          <div className="ai-bots">
-            <div className="tweak-title">
-              <h1>AI & Bots 🤖</h1>
-            </div>
-            <p>Most advance artificial intelligence tools that will make your life much more easier.</p>
-            <div className="slider" id="slider-spacer">
-              <div className="slides">
-                <div id="ai-bots-1">
-                  {/* MODULE */}
-                  <div><a href="https://openai.com/blog/chatgpt/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="ai-bots-image">
-                          <Image src={chatgpt} alt="chatgpt" />
-                        </div>
-                        <h3 className="cardi__title">Chat GPT
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Top of OpenAI's which can do anything you ask. </p>
-                      </div>
-                      <div className="cardi__date">
-                        🎴
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-2">
-                  {/* MODULE */}
-                  <div><a href="https://writesonic.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="ai-bots-image">
-                          <Image src={writesonic} alt="writesonic" />
-                        </div>
-                        <h3 className="cardi__title">Writesonic
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Alternative to Chat GPT with better user-interface. </p>
-                      </div>
-                      <div className="cardi__date">
-                        🀄️
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-3">
-                  {/* MODULE */}
-                  <div><a href="https://midjourney.com/home/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image">
-                          <Image src={midjourney} alt="midjourney" />
-                        </div>
-                        <h3 className="cardi__title">Midjourney
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">OpenAI that creates images based on textual descriptions. </p>
-                      </div>
-                      <div className="cardi__date">
-                        🌄
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-4">
-                  {/* MODULE */}
-                  <div><a href="https://www.remove.bg/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="ai-bots-image">
-                          <Image src={removebg} alt="removebg" />
-                        </div>
-                        <h3 className="cardi__title">Remove Bg
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">AI removes any image background. </p>
-                      </div>
-                      <div className="cardi__date">
-                        🔳
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-5">
-                  {/* MODULE */}
-                  <div><a href="https://quillbot.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="ai-bots-image">
-                          <Image src={quillbot} alt="quillbot" />
-                        </div>
-                        <h3 className="cardi__title">Quillbot
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Paraphrasing tool that helps you re-write all your essays.</p>
-                      </div>
-                      <div className="cardi__date">
-                        🖊️
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-6">
-                  {/* MODULE */}
-                  <div><a href="https://imagecolorpicker.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="ai-bots-image">
-                          <Image src={imagecolorpicker} alt="ImageColorPicker" />
-                        </div>
-                        <h3 className="cardi__title">ImageColorPicker
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Gives your picture, image color code when uploaded.</p>
-                      </div>
-                      <div className="cardi__date">
-                        🍭
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-7">
-                  {/* MODULE */}
-                  <div><a href="https://ricks-apps.com/osx/sitesucker/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="ai-bots-image">
-                          <Image src={sitesucker} alt="Sitesucker" />
-                        </div>
-                        <h3 className="cardi__title">Sitesucker
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Ultimate tool that copies any website.</p>
-                      </div>
-                      <div className="cardi__date">
-                        🖲
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-8">
-                  {/* MODULE */}
-                  <div><a href="https://splitter.ai/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="ai-bots-image">
-                          <Image src={splitter} alt="Splitter" />
-                        </div>
-                        <h3 className="cardi__title">Splitter
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Removes any vocals or audio from music.</p>
-                      </div>
-                      <div className="cardi__date">
-                        🎹
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-9">
-                  {/* MODULE */}
-                  <div><a href="https://somiibo.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image-title" id="ai-bots-image">
-                          <Image src={somiibo} alt="Somiibo" />
-                        </div>
-                        <h3 className="cardi__title">Somiibo
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Social media automation platform for marketing.</p>
-                      </div>
-                      <div className="cardi__date">
-                        📣
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-10">
-                  {/* MODULE */}
-                  <div><a href="https://donotpay.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image-title" id="ai-bots-image">
-                          <Image src={donotpay} alt="DoNotPay" />
-                        </div>
-                        <h3 className="cardi__title">DoNotPay
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">First robot lawyer which also can cancel your free trials.</p>
-                      </div>
-                      <div className="cardi__date">
-                        ⚖️
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-11">
-                  {/* MODULE */}
-                  <div><a href="https://www.loom.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image-title" id="ai-bots-image">
-                          <Image src={loom} alt="Loom" />
-                        </div>
-                        <h3 className="cardi__title">Loom
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Record your laptop screen, yourself and more.</p>
-                      </div>
-                      <div className="cardi__date">
-                        💻
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-12">
-                  {/* MODULE */}
-                  <div><a href="https://soundbolt.me/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image-title" id="ai-bots-image">
-                          <Image src={soundbolt} alt="Soundbolt" />
-                        </div>
-                        <h3 className="cardi__title">Soundbolt
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Powerful Soundcloud and Audiomack plays tool.</p>
-                      </div>
-                      <div className="cardi__date">
-                        🔊
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-13">
-                  {/* MODULE */}
-                  <div><a href="https://www.naturalreaders.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image-title" id="ai-bots-image">
-                          <Image src={naturalreader} alt="NaturalReader" />
-                        </div>
-                        <h3 className="cardi__title">Natural Reader
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Text-to-Speech reader which reads anything for you.</p>
-                      </div>
-                      <div className="cardi__date">
-                        📒
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-14">
-                  {/* MODULE */}
-                  <div><a href="https://www.cleverbot.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image-title" id="ai-bots-image">
-                          <Image src={cleverbot} alt="cleverbot" />
-                        </div>
-                        <h3 className="cardi__title">Cleverbot
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Before Siri or Alexa, Cleverbot was your friend.</p>
-                      </div>
-                      <div className="cardi__date">
-                        🦿
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="ai-bots-15">
-                  {/* MODULE */}
-                  <div><a href="https://www.animaker.com/voice" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image-title" id="ai-bots-image">
-                          <Image src={animaker} alt="animaker" />
-                        </div>
-                        <h3 className="cardi__title">Animaker Voice
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Human voice over with more than 50 languages.</p>
-                      </div>
-                      <div className="cardi__date">
-                        🎼
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-              </div>
-              <div className="number-selector">
-                <a href="#ai-bots-1">1️⃣</a>ㅤ|
-                ㅤ<a href="#ai-bots-2">2️⃣</a>ㅤ|
-                ㅤ<a href="#ai-bots-3">3️⃣</a>ㅤ|
-                ㅤ<a href="#ai-bots-4">4️⃣</a>ㅤ|
-                ㅤ<a href="#ai-bots-5">5️⃣</a>ㅤ|
-                ㅤ<a href="#ai-bots-6">6️⃣</a>ㅤ|
-                ㅤ<a href="#ai-bots-7">7️⃣</a>ㅤ|
-                ㅤ<a href="#ai-bots-8">8️⃣</a>ㅤ|
-                ㅤ<a href="#ai-bots-9">9️⃣</a>ㅤ|
-                ㅤ<a href="#ai-bots-10">🔟</a>
-
-
-              </div>
-            </div>
-          </div>
-          {/* SECTION  */}
-          <div className="divider2"></div>
-          {/* SECTION  */}
-
-          <div className="editors">
-            <div className="tweak-title">
-              <h1>Editors 🎨</h1>
-            </div>
-            <p>Find the right tools to create and edit any art or image.</p>
-            <div className="slider" id="slider-spacer">
-              <div className="slides">
-                <div id="editors-1">
-                  {/* MODULE */}
-                  <div><a href="https://inshot.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="ai-bots-image">
-                          <Image src={inshot} alt="inshot" />
-                        </div>
-                        <h3 className="cardi__title">Inshot
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Be Creative with filters, effects and stickers.</p>
-                      </div>
-                      <div className="cardi__date">
-                        IPhone, Android
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="editors-2">
-                  {/* MODULE */}
-                  <div><a href="https://www.lightricks.com/products" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image">
-                          <Image src={lightricks} alt="Lightricks" />
-                        </div>
-                        <h3 className="cardi__title">Lightricks
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Make any of your art live!</p>
-                      </div>
-                      <div className="cardi__date">
-                        IPhone, Android
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="editors-3">
-                  {/* MODULE */}
-                  <div><a href="https://www.noelshack.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image">
-                          <Image src={noelshack} alt="NoelShack" />
-                        </div>
-                        <h3 className="cardi__title">NoelShack
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Store image online for up to 3 months.</p>
-                      </div>
-                      <div className="cardi__date">
-                        IPhone, Mac, Android, Windows
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="editors-4">
-                  {/* MODULE */}
-                  <div><a href="https://play.google.com/store/apps/details?id=com.adobe.adobephotoshopfix&hl=en_US&gl=US" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="ai-bots-image">
-                          <Image src={photoshopfix} alt="photoshopfix" />
-                        </div>
-                        <h3 className="cardi__title">Photoshop Fix
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Excellent to heal any image.</p>
-                      </div>
-                      <div className="cardi__date">
-                        Android
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="editors-5">
-                  {/* MODULE */}
-                  <div><a href="https://www.iloveimg.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="ai-bots-image">
-                          <Image src={iloveimg} alt="iloveimg" />
-                        </div>
-                        <h3 className="cardi__title">ILoveIMG
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">Resize any image of your choice.</p>
-                      </div>
-                      <div className="cardi__date">
-                        Mac, Windows
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="editors-6">
-                  {/* MODULE */}
-                  <div><a href="https://www.remove.bg/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="ai-bots-image">
-                          <Image src={removebged} alt="removebged" />
-                        </div>
-                        <h3 className="cardi__title">Remove Bg
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">AI removes image background.</p>
-                      </div>
-                      <div className="cardi__date">
-                        Mac, Windows
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-              </div>
-              <div className="number-selector">
-                <a href="#editors-1">1️⃣</a>ㅤ|
-                ㅤ<a href="#editors-2">2️⃣</a>ㅤ|
-                ㅤ<a href="#editors-3">3️⃣</a>ㅤ|
-                ㅤ<a href="#editors-4">4️⃣</a>ㅤ|
-                ㅤ<a href="#editors-5">5️⃣</a>ㅤ|
-                ㅤ<a href="#editors-6">6️⃣</a>
-              </div>
-            </div>
-          </div>
-          {/* SECTION  */}
-          <div className="divider2"></div>
-          {/* SECTION  */}
-
-          <div className="cryptocurrencies">
-            <div className="tweak-title">
-              <h1>Cryptocurrencies 🪙</h1>
-            </div>
-            <p>Top cryptocurrencies you will love to invest your money in.</p>
-            <div className="slider" id="slider-spacer">
-              <div className="slides">
-                <div id="cryptocurrencies-1">
-                  {/* MODULE */}
-                  <div><a href="https://bitcoin.org/en/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={bitcoin} alt="bitcoin" />
-                        </div>
-                        <h3 className="cardi__title">Bitcoin
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                       Satoshi Nakamoto
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-2">
-                    {/* MODULE */}
-                    <div><a href="https://ethereum.org/en/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={ethereum} alt="ethereum" />
-                        </div>
-                        <h3 className="cardi__title">Ethereum
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                      Vitalik Buterin
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-3">
-                    {/* MODULE */}
-                    <div><a href="https://www.binance.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={binance} alt="Binance" />
-                        </div>
-                        <h3 className="cardi__title">Binance
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                      Changpeng Zhao
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-4">
-                    {/* MODULE */}
-                    <div><a href="https://cardano.org/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={cardano} alt="Cardano" />
-                        </div>
-                        <h3 className="cardi__title">Cardano
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                      Charles Hoskinson
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-5">
-                    {/* MODULE */}
-                    <div><a href="https://solana.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={solana} alt="Solana" />
-                        </div>
-                        <h3 className="cardi__title">Solana
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                      Anatoly Yakovenko
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-6">
-                    {/* MODULE */}
-                    <div><a href="https://www.algorand.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={algorand} alt="Algorand" />
-                        </div>
-                        <h3 className="cardi__title">Algorand
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                      Silvio Micali
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-7">
-                    {/* MODULE */}
-                    <div><a href="https://dfinity.org/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={internetcomputer} alt="internetcomputer" />
-                        </div>
-                        <h3 className="cardi__title">Internet Computer
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                      Dominic Williams
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-8">
-                    {/* MODULE */}
-                    <div><a href="https://polkadot.network/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={polkadot} alt="polkadot" />
-                        </div>
-                        <h3 className="cardi__title">Polkadot
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                      Gavin Wood
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-9">
-                    {/* MODULE */}
-                    <div><a href="https://polygon.technology/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={polygon} alt="polygon" />
-                        </div>
-                        <h3 className="cardi__title">Polygon
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                      Sandeep Nailwal
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-10">
-                   {/* MODULE */}
-                  <div><a href="https://rally.io/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={rally} alt="rally" />
-                        </div>
-                        <h3 className="cardi__title">Rally
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                       Kevin Chou
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-11">
-                    {/* MODULE */}
-                    <div><a href="https://shibatoken.com/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={shibainu} alt="shibainu" />
-                        </div>
-                        <h3 className="cardi__title">Shiba Inu
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                      Ryoshi
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-12">
-                    {/* MODULE */}
-                    <div><a href="https://uniswap.org/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={uniswap} alt="Uniswap" />
-                        </div>
-                        <h3 className="cardi__title">Uniswap
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ</p>
-                      </div>
-                      <div className="cardi__date">
-                      Hayden Adams
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-                <div id="cryptocurrencies-13">
-                        {/* MODULE */}
-                        <div><a href="https://tether.to/" target="_blank">
-                    <div className="cardi">
-                      <div className="app-row">
-                        <div className="tweak-image" id="cryptocurrencies-image">
-                          <Image src={tether} alt="Tether" />
-                        </div>
-                        <h3 className="cardi__title">Tether
-                        </h3>
-                      </div>
-                      <div className="app-row">
-                        <p className="cardi__content">ᴀᴜᴛʜᴏʀ(s)</p>
-                      </div>
-                      <div className="cardi__date">
-                      Brock Pierce, Craig Sellars, and Reeve Collins
-                      </div>
-                      <div className="cardi__arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-                          <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                        </svg>
-                      </div>
-                    </div></a>
-                  </div>
-                  {/* MODULE */}
-                </div>
-              </div>
-              <div className="number-selector">
-                <a href="#cryptocurrencies-1">1️⃣</a>ㅤ|
-                ㅤ<a href="#cryptocurrencies-2">2️⃣</a>ㅤ|
-                ㅤ<a href="#cryptocurrencies-3">3️⃣</a>ㅤ|
-                ㅤ<a href="#cryptocurrencies-4">4️⃣</a>ㅤ|
-                ㅤ<a href="#cryptocurrencies-5">5️⃣</a>ㅤ|
-                ㅤ<a href="#cryptocurrencies-6">6️⃣</a>ㅤ|
-                ㅤ<a href="#cryptocurrencies-7">7️⃣</a>ㅤ|
-                ㅤ<a href="#cryptocurrencies-8">8️⃣</a>ㅤ|
-                ㅤ<a href="#cryptocurrencies-9">9️⃣</a>ㅤ|
-                ㅤ<a href="#cryptocurrencies-10">🔟</a>
-              </div>
-            </div>
-          </div>
-          {/* SECTION  */}
-        </div>
-        {/* TWEAK APPS  */}
-
-        <div id="commands" className="rounded shadow">
-          <h2>Build and Run</h2>
-          <p>Learn How To Get Started</p>
-          <details>
-            <summary>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              FAQs
-            </summary>
-            <pre>
-              <span>⎆ What is Build and Run?</span>
-              Build and Run (B&R) is a technology company that provides multiple services from all categories for a fair price.
-              <span>⎆ What service do we provide?</span>
-              We provides all kinds of services, such as Website, Application Development, Design, Arts, Social Media Marketing, News, Tweaks, and More.
-              <span>⎆ What makes our Administrator Panel so special?</span>
-              First and foremost, it is incredibly user-friendly. Whether you are a tech-savvy individual or someone who is new to using software, the administrator panel is easy to navigate and understand. This makes it accessible to everyone, regardless of their level of expertise.
-              <span>⎆ How can you reach us?</span>
-              Email us at suppport@buildandrun.net or via text at +1 (469) 215-1582.
-              <span>⎆ How can you partner with us?</span>
-              Send us an email at support@buildandrun.net if you are a person or business and would want to collaborate with us.
-              <span>⎆ How can you join our team?</span>
-              Apply for a position at B&R to help us build and Run a world with tech that has no limits. Send us your CV at jobs@buildandrun.net.
-            </pre>
-          </details>
-          <details>
-            <summary>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              Privacy Policy
-            </summary>
-            <pre><a href="./privacy-policy">Click ➤ Privacy Policy 🔒</a></pre>
-          </details>
-          <details>
-            <summary>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              Terms Of Service
-            </summary>
-            <pre>
-              <a href="./terms-of-service">Click ➤ Terms Of Service 📜</a>
-            </pre>
-          </details>
-        </div>
-
-        <p id="love">
-          Build and Run v2.0.2 crafted with
-          <svg
-            fill="currentColor"
-            stroke="none"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            />
-          </svg>
-        </p>
-      </div>
-      <div>
-        <footer className="footer">
-          <div className="waves">
-          </div>
-          <ul className="social-icon">
-            <li className="social-icon__item"><a className="social-icon__link" href="https://www.facebook.com/buildandrun.net/" target="_blank">
-              <div className="social-bar">
-                <Image src={Facebook} alt="Facebook" />
-              </div>
-            </a></li>
-            <li className="social-icon__item"><a className="social-icon__link" href="https://www.twitter.com/brstore_us" target="_blank">
-              <div className="social-bar">
-                <Image src={Twitter} alt="Twitter" />
-              </div>
-            </a></li>
-            <li className="social-icon__item"><a className="social-icon__link" href="https://www.instagram.com/bdrstoreus/" target="_blank">
-              <div className="social-bar">
-                <Image src={Instagram} alt="Instagram" />
-              </div>
-            </a></li>
-            <li className="social-icon__item"><a className="social-icon__link" href="https://www.youtube.com/@buildandrun." target="_blank">
-              <div className="social-bar">
-                <Image src={Youtube} alt="Youtube" />
-              </div>
-            </a></li>
-          </ul>
-          <ul className="menu">
-            <li className="menu__item"><a className="menu__link" href="./company" target="_blank">Company</a></li>
-            <li className="menu__item"><a className="menu__link" href="./partners" target="_blank">Partners</a></li>
-            <li className="menu__item"><a className="menu__link" href="https://www.dmca.com/compliance/buildandrun.net" target="_blank">DMCA.com</a></li>
-
-          </ul>
-          <p>&copy;2023 B&R | All Rights Reserved</p>
-        </footer>
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script noModule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-      </div>
-    </div>
-  );
+    );
 }
 
-export default Index;
+export default TweakApps;
