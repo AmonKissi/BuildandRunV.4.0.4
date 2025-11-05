@@ -33,7 +33,7 @@ const TEAM_MEMBERS = [
     },
     {
         name: "Mike",
-        role: "Application Developer\nSoftware Engineer",
+        role: "Web Developer\nSoftware Engineer",
         image: "/team-old/img/team/kelvin.jpg",
         color: "yellow-light", 
     },
